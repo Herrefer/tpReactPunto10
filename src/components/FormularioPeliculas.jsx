@@ -53,7 +53,7 @@ const FormularioPeliculas = () => {
               onChange={(e) => setGenero(e.target.value)}
               required
             >
-              <option>Seleccionar género</option>
+              <option value="">Seleccionar una opción</option>
               <option value="Accion">Acción</option>
               <option value="Drama">Drama</option>
               <option value="Comedia">Comedia</option>
