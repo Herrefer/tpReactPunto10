@@ -1,6 +1,6 @@
-import CitaCliente from "./CitaCliente";
+import PeliculaAgregada from "./PeliculaAgregada";
 
-const ListaCistas = ({ citasAgendadasProps, borrarCitaProps }) => {
+const ListaPeliculas = ({ citasAgendadasProps, borrarCitaProps }) => {
   return (
     <>
       <div className="container text-center">
@@ -8,15 +8,15 @@ const ListaCistas = ({ citasAgendadasProps, borrarCitaProps }) => {
       </div>
       <div className="container d-flex flex-row flex-wrap justify-content-center">
         {citasAgendadasProps.map((cita, posicionElemento) => (
-          <CitaCliente
+          <PeliculaAgregada
             key={posicionElemento}
             citaClienteProps={cita}
             borrarCitaProps ={borrarCitaProps}
-          ></CitaCliente>
+          ></PeliculaAgregada>
         ))}
       </div>
     </>
   );
 };
 
-export default ListaCistas;
+export default ListaPeliculas;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import ListaCistas from "./ListaCistas";
+import ListaPeliculas from "./ListaPeliculas";
 
-const FormularioCliente = () => {
+const FormularioPeliculas = () => {
   const [nombreMascota, setNombreMascota] = useState("");
   const [nombreDuenio, setNombreDuenio] = useState("");
   const [fecha, setFecha] = useState("");
@@ -92,12 +92,12 @@ const FormularioCliente = () => {
           </Button>
         </Form>
       </div>
-      <ListaCistas
+      <ListaPeliculas
         citasAgendadasProps={citasAgendadas}
         borrarCitaProps={borrarCita}
-      ></ListaCistas>
+      ></ListaPeliculas>
     </>
   );
 };
 
-export default FormularioCliente;
+export default FormularioPeliculas;

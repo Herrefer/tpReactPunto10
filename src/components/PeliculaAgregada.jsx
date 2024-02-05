@@ -1,6 +1,6 @@
 import { Accordion, Button, Card } from "react-bootstrap";
 
-const CitaCliente = ({ citaClienteProps, borrarCitaProps }) => {
+const PeliculaAgregada = ({ citaClienteProps, borrarCitaProps }) => {
   return (
     <Card style={{ width: "15rem" }} className="mx-3 mb-3">
       <Card.Body>
@@ -24,4 +24,4 @@ const CitaCliente = ({ citaClienteProps, borrarCitaProps }) => {
   );
 };
 
-export default CitaCliente;
+export default PeliculaAgregada;
