@@ -4,7 +4,7 @@ const ListaCistas = ({ citasAgendadasProps, borrarCitaProps }) => {
   return (
     <>
       <div className="container text-center">
-        <h2>Citas agendadas</h2>
+        <h2>Películas subidas</h2>
       </div>
       <div className="container d-flex flex-row flex-wrap justify-content-center">
         {citasAgendadasProps.map((cita, posicionElemento) => (
