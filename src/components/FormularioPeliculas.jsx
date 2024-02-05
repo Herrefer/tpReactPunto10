@@ -3,46 +3,31 @@ import { Button, Form } from "react-bootstrap";
 import ListaPeliculas from "./ListaPeliculas";
 
 const FormularioPeliculas = () => {
-  const [nombreMascota, setNombreMascota] = useState("");
-  const [nombreDuenio, setNombreDuenio] = useState("");
-  const [fecha, setFecha] = useState("");
-  const [hora, setHora] = useState("");
-  const [detalles, setDetalles] = useState("");
-  const citasLocalStorage = JSON.parse(localStorage.getItem("keyCitas")) || [];
-  const [citasAgendadas, setCitasAgendadas] = useState(citasLocalStorage);
+  const [titulo, setTitulo] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [genero, setGenero] = useState("");
+  const peliculasLocalStorage =
+    JSON.parse(localStorage.getItem("keyPeliculas")) || [];
+  const [peliculasCargadas, setPeliculasCargadas] = useState(
+    peliculasLocalStorage
+  );
 
   useEffect(() => {
-    localStorage.setItem("keyCitas", JSON.stringify(citasAgendadas));
-  }, [citasAgendadas]);
-
-  //expresiones regulares
-  const expRegNombreDuenio = /^[a-zA-Zá-úÁ-ÚüÜñÑ\s']+$/;
-  const expRegNombreMascota = /^[a-zA-Zá-úÁ-ÚüÜñÑ\s']+$/;
-  const expRegFecha =
-    /^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/[0-9]{10}$/;
-  const expRegHora = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+    localStorage.setItem("keyPeliculas", JSON.stringify(peliculasCargadas));
+  }, [peliculasCargadas]);
 
   function handleSubmit(e) {
-    if (
-      expRegNombreDuenio.test(nombreDuenio) &&
-      expRegNombreMascota.test(nombreMascota) &&
-      expRegHora.test(hora)
-    ) {
-      e.preventDefault();
-      let idCita = crypto.randomUUID();
-      setCitasAgendadas([
-        ...citasAgendadas,
-        { nombreMascota, nombreDuenio, fecha, hora, detalles, idCita },
-      ]);
-    } else {
-      alert("Por favor, verifique los datos introducidos");
-    }
+    let idPelicula = crypto.randomUUID();
+    setPeliculasCargadas([
+      ...peliculasCargadas,
+      { titulo, descripcion, genero, idPelicula },
+    ]);
   }
-  function borrarCita(idUnica) {
-    const citasFiltradas = citasAgendadas.filter(
-      (cita) => cita.idCita !== idUnica
+  function borrarPelicula(idUnica) {
+    const peliculasFiltradas = peliculasCargadas.filter(
+      (pelicula) => pelicula.idPelicula !== idUnica
     );
-    setCitasAgendadas(citasFiltradas);
+    setPeliculasCargadas(peliculasFiltradas);
   }
   return (
     <>
@@ -56,23 +41,27 @@ const FormularioPeliculas = () => {
               placeholder="Introducir el título completo"
               minLength={3}
               maxLength={50}
-              onChange={(e) => setNombreMascota(e.target.value)}
-              value={nombreMascota}
+              onChange={(e) => setTitulo(e.target.value)}
+              value={titulo}
               required
             ></Form.Control>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formGenero">
             <Form.Label>Género</Form.Label>
-            <Form.Select aria-label="select">
+            <Form.Select
+              aria-label="select"
+              onChange={(e) => setGenero(e.target.value)}
+              required
+            >
               <option>Seleccionar género</option>
-              <option value="1">Acción</option>
-              <option value="2">Drama</option>
-              <option value="3">Comedio</option>
-              <option value="4">Infantil</option>
-              <option value="5">Animada</option>
-              <option value="6">Romance</option>
-              <option value="7">Terror</option>
-              <option value="8">Documental</option>
+              <option value="Accion">Acción</option>
+              <option value="Drama">Drama</option>
+              <option value="Comedia">Comedia</option>
+              <option value="Infantil">Infantil</option>
+              <option value="Animada">Animada</option>
+              <option value="Romance">Romance</option>
+              <option value="Terror">Terror</option>
+              <option value="Documental">Documental</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formDescripcion">
@@ -82,19 +71,19 @@ const FormularioPeliculas = () => {
               placeholder="Introducir una breve descripción sobre la película"
               minLength={10}
               maxLength={80}
-              onChange={(e) => setNombreDuenio(e.target.value)}
-              value={nombreDuenio}
+              onChange={(e) => setDescripcion(e.target.value)}
+              value={descripcion}
               required
             ></Form.Control>
           </Form.Group>
           <Button variant="primary" type="submit" className="my-3">
-            Agendar turno
+            Agregar película
           </Button>
         </Form>
       </div>
       <ListaPeliculas
-        citasAgendadasProps={citasAgendadas}
-        borrarCitaProps={borrarCita}
+        peliculasCargadasProps={peliculasCargadas}
+        borrarPeliculaProps={borrarPelicula}
       ></ListaPeliculas>
     </>
   );
